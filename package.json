@@ -1,0 +1,14 @@
+{
+  "name": "wri",
+  "version": "1.0.0",
+  "description": "A class project.",
+  "main": "src.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Julian Knodt <julianknodt@gmail.com>",
+  "license": "MIT",
+  "dependencies": {
+    "vorpal": "^1.12.0"
+  }
+}
