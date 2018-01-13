@@ -9,7 +9,7 @@
   "author": "Julian Knodt <julianknodt@gmail.com>",
   "license": "MIT",
   "dependencies": {
-    "colors": "^1.1.2",
+    "nightmare": "^2.10.0",
     "vorpal": "^1.12.0"
   }
 }

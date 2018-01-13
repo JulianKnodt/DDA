@@ -6,13 +6,17 @@ const run = async (cmd) => new Promise((res, rej) => exec(cmd, (error, stdout, s
   if(stderr) console.error(stderr);
 }));
 
-const rdmString = len => Math.random()
-  .toString(36)
-  .slice(0, len);
+const rdmString = len => {
+  let result = '';
+  while(result.length < len) result += Math.random().toString(36).slice(2);
+  return result.slice(0, len)
+}
 
-const createSayString = txt => `say -i -v Daniel -r 1000 ${txt}`.trim();
+const padRight = (i, len) => (i + rdmString(len - i.length));
 
-const sayAndLog = async txt => {
+const createSayString = (txt, v="Daniel") => `say -i -v ${v.trim()} -r 1000 ${txt}`.trim();
+
+const sayAndLog = async(txt,log) => {
   const lines = txt.split('\n').map(i => i.trim());
   for(const line of lines) {
     await run(createSayString(line));
@@ -20,10 +24,14 @@ const sayAndLog = async txt => {
   }
 };
 
+const clear = io => io('\u001b[2J\u001b[0;0H');
+
 module.exports = {
   sleep,
   run,
   rdmString,
   createSayString,
   sayAndLog,
+  clear,
+  padRight,
 }
