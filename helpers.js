@@ -10,8 +10,20 @@ const rdmString = len => Math.random()
   .toString(36)
   .slice(0, len);
 
+const createSayString = txt => `say -i -v Daniel -r 1000 ${txt}`.trim();
+
+const sayAndLog = async txt => {
+  const lines = txt.split('\n').map(i => i.trim());
+  for(const line of lines) {
+    await run(createSayString(line));
+    log(line);
+  }
+};
+
 module.exports = {
   sleep,
   run,
   rdmString,
+  createSayString,
+  sayAndLog,
 }
