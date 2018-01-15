@@ -10,12 +10,13 @@ module.exports = (vorpal, log, prompt, sessionId) => new Command('continue0', 'C
   log('Thank you __name__ for proceeding.');
   await sayAndLog(`I will now run a few sample tests
     to assert that you are capable of answering.
+    The following tests have been designed to test your
+    __intelligence__.
     Please answer at your own pace,
     and feel free to take as long as you would like.`, log);
 
   const tooLong = setTimeout(async () => {
     await run(createSayString('Since you are taking so long, we will now play mysterious music.'));
-    await run('killall afplay');
     run('afplay darkestChild.mp3');
   }, 7000);
 
@@ -53,7 +54,7 @@ module.exports = (vorpal, log, prompt, sessionId) => new Command('continue0', 'C
   }, res)));
 
   await run(createSayString('I wonder'));
-  if (ans[2] === '0b1010' || ans === '10') log('Machine-like.');
+  if (ans[2] == '0b1010' || ans == '10') log('Machine-like.');
   else log('0');
 
   await sleep(500);

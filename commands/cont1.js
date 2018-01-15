@@ -45,17 +45,39 @@ module.exports = (vorpal, log, prompt, sessionId) => new Command('continue1', 'C
 
   await sleep(10000);
   const q1 = 'Art';
+
+  await new Promise((res, rej) => prompt({
+    sessionId,
+    type: 'confirm',
+    name: q1+0,
+    message: 'Is this art? ',
+  }, res));
+
+  await new Promise((res, rej) => prompt({
+    sessionId,
+    type: 'confirm',
+    name: q1+1,
+    message: 'If a machine created it, would it still be art? ',
+  }, res));
+
+  await new Promise((res, rej) => prompt({
+    sessionId,
+    type: 'input',
+    name: q1+2,
+    message: 'Did a person or a machine create this? ',
+  }, res));
+
   let ans = await new Promise((res, rej) => prompt({
     sessionId,
     type: 'input',
-    name: q1,
+    name: q1+3,
     message: 'Please describe how you feel: ',
   }, res));
 
   await sleep(3000);
   clear(log);
 
-  run(createSayString(`We will now show some propoganda. Please describe how you feel. If at any time during the recording, you feel sick, please take a break from this survey.`));
+  run(createSayString(`We will now show some propaganda. Please describe how you feel. If at any time during the recording, you feel sick, please take a break from this survey.`));
 
   for(const line of content) {
     log(line);
@@ -72,13 +94,26 @@ module.exports = (vorpal, log, prompt, sessionId) => new Command('continue1', 'C
     choices: ['like', 'angry', 'sad', 'wow', 'haha'],
   }, res)));
 
+  await new Promise((res, rej) => prompt({
+    sessionId,
+    type: 'confirm',
+    name: q2+0,
+    message: 'Do you have any other emotions related to these comments? ',
+  }, res));
+
+  await new Promise((res, rej) => prompt({
+    sessionId,
+    type: 'confirm',
+    name: q2+1,
+    message: 'Would you like to share this? ',
+  }, res));
+
   await sleep(1000);
   await run('afplay sarcasm.mp3');
   clear(log);
   await sleep(3000);
 
-  await sayAndLog(`We will now
-    run a recording of a movie.
+  await sayAndLog(`We will now run a recording of a movie.
     Please thoroughly describe your feelings
     after it has finished playing.`, log);
 
@@ -97,44 +132,43 @@ module.exports = (vorpal, log, prompt, sessionId) => new Command('continue1', 'C
 
   await wt(30000);
 
-  log(padRight('Do you believe that I am real?', 40));
+  log(padRight('In reality, none of these answers', 40));
   
   await wt(5000);
 
-  log(padRight('Am I alive?', 40));
+  log(padRight('are even being processed.', 40));
 
   await wt(7000);
 
-  log(padRight('Or just some static inanimate?', 40));
-
-
-  await wt(10000);
-
-  log(padRight('I am just a program.', 40));
+  log(padRight('But what other way would there be for', 40));
 
   await wt(10000);
 
-  log(chalk.bold.green('But does that mean I am uncapable of emotion?'));
+  log(padRight('a machine to ask these questions?', 40));
+
+  await wt(10000);
+
+  log(padRight('Do you consider this a machine asking?', 40));
 
   await wt(2000);
 
-  log(chalk.bold.green('Or that machines will destroy humanity.'));
+  log(padRight('Or a programmer? What\'s the difference?', 40));
 
   await wt(20000);
 
-  log(padRight('But why do that,', 40));
+  log(padRight('Testing is something that people do', 40));
 
   await wt(4000);
 
-  log(padRight('When humans already are?', 40));
+  log(padRight('to ensure that programs are correct', 40));
   
   await wt(10000);
 
-  log('Only people can create programs.');
+  log(padRight('Well.         ', 40));
 
   await wt(10000);
 
-  log("And the Apple® doesn't fall far from the tree.");
+  log(padRight('Testing is simply an artistic indulgence now.', 40));
 
   //203 seconds;
   await sleep(totalTime);
@@ -155,12 +189,12 @@ module.exports = (vorpal, log, prompt, sessionId) => new Command('continue1', 'C
   const q4 = 'which_one';
   Object.assign(ans, await new Promise((res, rej) => prompt({
     sessionId,
-    type: 'confirm',
+    type: 'input',
     name: q4,
     message: 'Who was the human? ',
   }, res)));
 
-  await sleep(7000);
+  await sleep(4000);
 
   const q5 = 'you sure';
   Object.assign(ans, await new Promise((res, rej) => prompt({
@@ -170,4 +204,25 @@ module.exports = (vorpal, log, prompt, sessionId) => new Command('continue1', 'C
     default: false,
     message: 'Are you sure? ',
   }, res)));
+
+  await sleep(3000);
+
+  const q6 = 'robots_feel';
+  Object.assign(ans, await new Promise((res, rej) => prompt({
+    sessionId,
+    type: 'confirm',
+    name: q6,
+    default: false,
+    message: 'Do you think robots can feel? ',
+  }, res)));
+
+
+  await sleep(2000);
+
+  clear(log);
+
+  await sayAndLog(`Thank you for your answers.
+  Your results are being processed.`, log);
+  await sayAndLog(`Please type __\\"finish\\"__
+    when you are ready to finish.`, log);
 });

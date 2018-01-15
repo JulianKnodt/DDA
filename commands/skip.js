@@ -12,5 +12,6 @@ module.exports = (vorpal, log, prompt, sessionId, createFlow) => new Command('sk
       //SILENCE MORTALS
     }
   }
+  createFlow(require('./finish')(vorpal, log, prompt, sessionId));
 }, false);
 
